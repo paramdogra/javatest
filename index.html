@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      
+      h1 {
+        color: #00698f;
+      }
+      </style>
+      <script>
+        // Get the user's location
+var location = prompt("Enter your city or zip code:");
+
+// Use the Open Weather Map API to get the current weathervar apiKey = "YOUR_API_KEY_HERE";
+var apiUrl = "http://api.openweathermap.org/data/2.5/weather";
+var request = new XMLHttpRequest();
+request.open("GET", apiUrl + "?q=" + location + "&appid=" + apiKey, true);
+request.onload = function() {
+  if (request.status === 200) {
+    var data = JSON.parse(request.responseText);
+    var weather = data.weather[0];
+    var temperature = data.main.temp;
+    var description = weather.description;
+    var icon = weather.icon;
+
+    // Print out the current weather
+    console.log("Current weather in " + location + ":");
+    console.log("Temperature: " + temperature + "°C");
+    console.log("Description: " + description);
+    console.log("Icon: " + icon);
+  } else {
+    console.log("Error: " + request.statusText);
+  }
+};
+request.send();
+        </script>
+  <title>Weather Program</title>
+</head>
+<body>
+  <h1>Weather Program</h1>
+  <script src="weather.js"></script>
+</body>
+</html>
